@@ -15,6 +15,7 @@ Application.EnableCancelKey = xlDisabled
 
 Dim lastrw As Long, tenure As Long, i As Long, fr As Long, I_IEMIAMT As Double, inc As Long, Rng As Range
 Dim Op_bal As Double, cl_bal As Double, iPrinciple As Double, iInterest As Double, iRate As Double, endrw As Long
+Dim cum_interest As Double
 
 Clearcontents
 lastrw = Sheet1.Range("B" & Rows.Count).End(xlUp).Row
@@ -24,6 +25,7 @@ fr = lastrw + 1
 Op_bal = Sheet1.Range("D3")
 iRate = Sheet1.Range("D4")
 inc = 0
+cum_interest = 0
 I_IEMIAMT = -(Application.WorksheetFunction.Pmt(iRate / 1200, tenure, Op_bal))
 For i = fr To endrw
  On Error Resume Next
@@ -49,7 +51,8 @@ For i = fr To endrw
         .TintAndShade = 0
         .Weight = xlThin
   End With
+  cum_interest = cum_interest + iInterest
 Next i
-
+Sheet1.Range("H3").Value = cum_interest
 
 End Sub
