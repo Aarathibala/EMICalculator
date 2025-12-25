@@ -14,11 +14,12 @@ Application.ScreenUpdating = False
 Application.DisplayAlerts = False
 Application.EnableCancelKey = xlDisabled
 
-Dim lastrw As Long, Rng As Range
-lastrw = Sheet1.Range("B" & Rows.Count).End(xlUp).Row
-
-If lastrw > 11 Then
-    Set Rng = Sheet1.Range("B" & lastrw, "G" & lastrw)
+Dim lr As Long, Rng As Range, nr As Long, fr As Long
+fr =  11
+nr = fr + 1
+lr = Sheet1.Range("B" & Rows.Count).End(xlUp).Row
+If lr > fr Then
+    Set Rng = Sheet1.Range("B" & nr, "G" & lr)
         With Rng
         .Clearcontents
         .Borders.LineStyle = xlNone
