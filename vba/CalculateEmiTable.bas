@@ -1,4 +1,4 @@
-Attribute VB_Name = "Module1"
+Attribute VB_Name = "CalculateEmiTable"
 Option Explicit
 '====================================================
 ' Project     : EMI Calculator
@@ -16,6 +16,7 @@ Application.EnableCancelKey = xlDisabled
 
 Dim lastrw As Long, tenure As Long, i As Long, fr As Long, I_IEMIAMT As Double, inc As Long, Rng As Range
 Dim Op_bal As Double, cl_bal As Double, iPrinciple As Double, iInterest As Double, iRate As Double, endrw As Long
+Dim tot_balance as Double 
 
 Clearcontents
 lastrw = Sheet1.Range("B" & Rows.Count).End(xlUp).Row
@@ -25,6 +26,7 @@ fr = lastrw + 1
 Op_bal = Sheet1.Range("D3")
 iRate = Sheet1.Range("D4")
 inc = 0
+tot_balance = 0
 I_IEMIAMT = -(Application.WorksheetFunction.Pmt(iRate / 1200, tenure, Op_bal))
 For i = fr To endrw
  On Error Resume Next
@@ -42,6 +44,7 @@ For i = fr To endrw
     Sheet1.Range("G" & i) = cl_bal
     Sheet1.Range("C" & i, "G" & i).Style = "comma"
     Op_bal = cl_bal
+    tot_balance = tot_balance + iInterest
     Set Rng = Sheet1.Range(Cells(i, 2), Cells(i, 7))
     
     With Rng.Borders
@@ -51,6 +54,6 @@ For i = fr To endrw
         .Weight = xlThin
   End With
 Next i
- 
+ Sheet1.Range("H3") = tot_balance
 
 End Sub

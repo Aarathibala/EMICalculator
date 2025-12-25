@@ -17,12 +17,12 @@ Application.EnableCancelKey = xlDisabled
 Dim lastrw As Long, Rng As Range
 lastrw = Sheet1.Range("B" & Rows.Count).End(xlUp).Row
 
-If lastrw > 9 Then
-    Set Rng = Sheet1.Range("B" & 10, "G" & lastrw)
-    With Rng
-    .Clearcontents
-    .Borders.LineStyle = xlNone
-    End With
+If lastrw > 11 Then
+    Set Rng = Sheet1.Range("B" & lastrw, "G" & lastrw)
+        With Rng
+        .Clearcontents
+        .Borders.LineStyle = xlNone
+        End With
 End If
 
 End Sub
